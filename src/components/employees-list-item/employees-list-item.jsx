@@ -10,16 +10,22 @@ class EmployeesListItem extends Component {
   }
 
   increaseHandler = () => {
-    this.setState((state) => ({
-      increase: !state.increase,
+    this.setState(({ increase }) => ({
+      increase: !increase,
     }));
+  };
+
+  removeEmployee = () => {
+    console.log('remove');
   };
 
   render() {
     const { name, salary } = this.props;
+    const { increase } = this.state;
     const itemClassName = `list-group-item d-flex justify-content-between ${
-      this.state.increase ? 'increase' : ''
+      increase ? 'increase' : ''
     }`;
+
     return (
       <li className={itemClassName}>
         <span className="list-group-item-label">{name}</span>
@@ -36,7 +42,11 @@ class EmployeesListItem extends Component {
           >
             <i className="fas fa-cookie"></i>
           </button>
-          <button className="btn-trash btn-sm" type="button">
+          <button
+            className="btn-trash btn-sm"
+            type="button"
+            onClick={this.removeEmployee}
+          >
             <i className="fas fa-trash"></i>
           </button>
           <i className="fas fa-star"></i>
