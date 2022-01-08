@@ -1,10 +1,13 @@
 import {Component} from 'react'
-import classes from './app.module.css';
+
 import AppInfo from '../app-info/app-info';
 import SearchPanel from '../search-panel/search-panel';
 import AppFilter from '../app-filter/app-filter';
 import EmployeesList from '../emplyees-list/employees-list';
 import EmployeesAddForm from '../employees-add-form/employees-add-form';
+
+import classes from './app.module.css';
+
 
 class App extends Component {
   constructor() {
@@ -18,10 +21,16 @@ class App extends Component {
     }
   }
 
+  addItem = (employee) => {
+    this.setState((state) => ({
+      data: [employee, ...state.data]
+    }))
 
- onDelete = id => {
-    this.setState(state => ({
-      data: state.data.filter(employee => employee.id !== id)
+  }
+
+ deleteItem = id => {
+    this.setState(({data}) => ({
+      data: data.filter(employee => employee.id !== id)
     }))
   }
 
@@ -38,8 +47,8 @@ class App extends Component {
         <AppFilter />
       </div>
 
-      <EmployeesList employees={data} onDelete={this.onDelete}/>
-      <EmployeesAddForm />
+      <EmployeesList employees={data} onDelete={this.deleteItem}/>
+      <EmployeesAddForm onAddEmployee={this.addItem}/>
     </div>
   );
 }
