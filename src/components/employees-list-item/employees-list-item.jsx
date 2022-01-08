@@ -16,9 +16,6 @@ class EmployeesListItem extends Component {
     }));
   };
 
-  removeEmployee = () => {
-    console.log('remove');
-  };
 
   likeHandler = () => {
     this.setState(({ liked }) => ({
@@ -27,7 +24,7 @@ class EmployeesListItem extends Component {
   };
 
   render() {
-    const { name, salary } = this.props;
+    const { name, salary, onDelete } = this.props;
     const { increase, liked } = this.state;
     const itemClassName = `list-group-item d-flex justify-content-between ${
       increase ? 'increase' : ''
@@ -54,7 +51,7 @@ class EmployeesListItem extends Component {
           <button
             className="btn-trash btn-sm"
             type="button"
-            onClick={this.removeEmployee}
+            onClick={onDelete}
           >
             <i className="fas fa-trash"></i>
           </button>

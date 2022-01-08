@@ -12,6 +12,10 @@ const App = () => {
     { name: 'Carl W.', salary: 5000, increase: false, id: 3 },
   ];
 
+  const onDelete = id => {
+    console.log(id)
+  }
+
   return (
     <div className={classes.app}>
       <AppInfo />
@@ -21,7 +25,7 @@ const App = () => {
         <AppFilter />
       </div>
 
-      <EmployeesList employees={data} />
+      <EmployeesList employees={data} onDelete={onDelete}/>
       <EmployeesAddForm />
     </div>
   );
