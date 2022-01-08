@@ -20,7 +20,9 @@ class App extends Component {
 
 
  onDelete = id => {
-    console.log(id)
+    this.setState(state => ({
+      data: state.data.filter(employee => employee.id !== id)
+    }))
   }
 
   render() {
