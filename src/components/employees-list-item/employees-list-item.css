@@ -43,9 +43,9 @@
   line-height: 35px;
   font-size: 16px;
   color: #ffd700;
-  transition: 0.3 all;
   transform: translateX(30px);
   opacity: 0;
+  transition: all 0.3s;
 }
 
 .list-group-item.like .fa-star {
