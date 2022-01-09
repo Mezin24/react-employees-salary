@@ -14,9 +14,9 @@ class App extends Component {
     super();
     this.state = {
       data: [
-        { name: 'John C.', salary: 800, increase: false, id: 1 },
-        { name: 'Alex M.', salary: 3000, increase: true, id: 2 },
-        { name: 'Carl W.', salary: 5000, increase: false, id: 3 },
+        { name: 'John C.', salary: 800, increase: false, rice: true, id: 1 },
+        { name: 'Alex M.', salary: 3000, increase: true, rice: false, id: 2 },
+        { name: 'Carl W.', salary: 5000, increase: false, rice: false, id: 3 },
       ],
     };
   }
@@ -29,6 +29,7 @@ class App extends Component {
       salary,
       increase: false,
       id: uniqid(),
+      rice: false,
     };
     this.setState((state) => ({
       data: [newEmployee, ...state.data],
@@ -38,6 +39,21 @@ class App extends Component {
   deleteItem = (id) => {
     this.setState(({ data }) => ({
       data: data.filter((employee) => employee.id !== id),
+    }));
+  };
+
+  onToggleIncrease = (id) => {
+    this.setState(({ data }) => ({
+      data: data.map((item) =>
+        item.id === id ? { ...item, increase: !item.increase } : item
+      ),
+    }));
+  };
+  onToggleRice = (id) => {
+    this.setState(({ data }) => ({
+      data: data.map((item) =>
+        item.id === id ? { ...item, rice: !item.rice } : item
+      ),
     }));
   };
 
@@ -53,7 +69,12 @@ class App extends Component {
           <AppFilter />
         </div>
 
-        <EmployeesList employees={data} onDelete={this.deleteItem} />
+        <EmployeesList
+          employees={data}
+          onDelete={this.deleteItem}
+          onToggleIncrease={this.onToggleIncrease}
+          onToggleRice={this.onToggleRice}
+        />
         <EmployeesAddForm onAddEmployee={this.addItem} />
       </div>
     );
