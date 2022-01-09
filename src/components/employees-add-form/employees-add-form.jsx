@@ -1,5 +1,4 @@
 import { Component } from 'react/cjs/react.production.min';
-import uniqid from 'uniqid';
 
 import './employees-add-form.css';
 
@@ -17,21 +16,19 @@ class EmployeesAddForm extends Component {
       [e.target.name]: e.target.value,
     });
   };
-  
-  onSubmitForm = e => {
-    e.preventDefault()
 
-    const {name, salary} = this.state;
-    const uniqid = require('uniqid');
+  onSubmitForm = (e) => {
+    e.preventDefault();
 
-    const newEmployee = {
-      name,
-      salary,
-      increase: false,
-      id: uniqid()
-    }
-    this.props.onAddEmployee(newEmployee)
-  }
+    const { name, salary } = this.state;
+
+    this.props.onAddEmployee(name, salary);
+
+    this.setState({
+      name: '',
+      salary: '',
+    });
+  };
 
   render() {
     const { name, salary } = this.state;
