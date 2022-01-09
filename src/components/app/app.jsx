@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import uniqid from 'uniqid';
 
 import AppInfo from '../app-info/app-info';
 import SearchPanel from '../search-panel/search-panel';
@@ -18,6 +17,7 @@ class App extends Component {
         { name: 'Alex M.', salary: 3000, increase: true, rice: false, id: 2 },
         { name: 'Carl W.', salary: 5000, increase: false, rice: false, id: 3 },
       ],
+      term: '',
     };
   }
 
@@ -49,30 +49,36 @@ class App extends Component {
       ),
     }));
   };
-  // onToggleRice = (id) => {
-  //   this.setState(({ data }) => ({
-  //     data: data.map((item) =>
-  //       item.id === id ? { ...item, rice: !item.rice } : item
-  //     ),
-  //   }));
-  // };
+
+  searchEmp = (items, term) => {
+    if (term.length === 0) return items;
+
+    return items.filter((item) =>
+      item.name.toLowerCase().includes(term.toLowerCase())
+    );
+  };
+
+  onUpdateSearch = (term) => {
+    this.setState({ term });
+  };
 
   render() {
-    const { data } = this.state;
+    const { data, term } = this.state;
     const employees = data.length;
     const empPremium = data.filter((item) => item.increase).length;
+    const visibleData = this.searchEmp(data, term);
 
     return (
       <div className={classes.app}>
         <AppInfo empTotal={employees} empPremiumTotal={empPremium} />
 
         <div className={classes['search-panel']}>
-          <SearchPanel />
+          <SearchPanel onUpdateSearch={this.onUpdateSearch} />
           <AppFilter />
         </div>
 
         <EmployeesList
-          employees={data}
+          employees={visibleData}
           onDelete={this.deleteItem}
           onToggleProp={this.onToggleProp}
         />
