@@ -13,9 +13,9 @@ class App extends Component {
     super();
     this.state = {
       data: [
-        { name: 'John C.', salary: 800, increase: false, rice: true, id: 1 },
-        { name: 'Alex M.', salary: 3000, increase: true, rice: false, id: 2 },
-        { name: 'Carl W.', salary: 5000, increase: false, rice: false, id: 3 },
+        { name: 'John C.', salary: 800, increase: false, rise: true, id: 1 },
+        { name: 'Alex M.', salary: 3000, increase: true, rise: false, id: 2 },
+        { name: 'Carl W.', salary: 5000, increase: false, rise: false, id: 3 },
       ],
       term: '',
       filter: '',
@@ -30,7 +30,7 @@ class App extends Component {
       salary,
       increase: false,
       id: uniqid(),
-      rice: false,
+      rise: false,
     };
     this.setState((state) => ({
       data: [newEmployee, ...state.data],
@@ -64,8 +64,8 @@ class App extends Component {
   };
 
   filterEmp = (items, filter) => {
-    if (filter === 'increase') {
-      return items.filter((item) => item.increase);
+    if (filter === 'rise') {
+      return items.filter((item) => item.rise);
     } else if (filter === 'moreThen') {
       return items.filter((item) => +item.salary > 1000);
     } else {

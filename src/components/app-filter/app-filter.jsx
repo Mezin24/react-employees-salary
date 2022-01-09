@@ -38,10 +38,10 @@ class AppFilter extends Component {
           Все сотрудники
         </button>
         <button
-          className={`btn btn${filter === 'increase' ? '' : '-outline'}-light`}
+          className={`btn btn${filter === 'rise' ? '' : '-outline'}-light`}
           type="button"
           onClick={this.onUpdateFilter}
-          data-filter="increase"
+          data-filter="rise"
         >
           Сотрудники на повышение
         </button>

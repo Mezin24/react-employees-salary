@@ -1,17 +1,17 @@
 import './employees-list-item.css';
 
 const EmployeesListItem = (props) => {
-  const { name, salary, onDelete, onToggleProp, increase, rice } = props;
+  const { name, salary, onDelete, onToggleProp, increase, rise } = props;
   const itemClassName = `list-group-item d-flex justify-content-between ${
     increase ? 'increase' : ''
-  } ${rice ? 'like' : ''}`;
+  } ${rise ? 'like' : ''}`;
 
   return (
     <li className={itemClassName}>
       <span
         className="list-group-item-label"
         onClick={onToggleProp}
-        data-toggle="rice"
+        data-toggle="rise"
       >
         {name}
       </span>
