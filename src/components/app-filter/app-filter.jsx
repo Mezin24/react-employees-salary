@@ -1,61 +1,31 @@
-import { Component } from 'react/cjs/react.production.min';
-
 import './app-filter.css';
 
-class AppFilter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filter: '',
-    };
-  }
+const AppFilter = (props) => {
+  const buttons = [
+    { name: 'all', value: 'Все сотрудники' },
+    { name: 'rise', value: 'Сотрудники на повышение' },
+    { name: 'moreThen', value: 'З/П больше 1000$' },
+  ];
 
-  onClearFilter = () => {
-    this.props.onUpdateFilter('');
-    this.setState({
-      filter: '',
-    });
-  };
+  return (
+    <div className="btn-group">
+      {buttons.map((btn) => {
+        const { name, value } = btn;
+        const active = props.filter === name;
+        const clazz = `btn ${active ? 'btn-light' : 'btn-outline-light'}`;
 
-  onUpdateFilter = (e) => {
-    const filter = e.target.getAttribute('data-filter');
-    this.props.onUpdateFilter(filter);
-    this.setState({
-      filter,
-    });
-  };
-
-  render() {
-    const { filter } = this.state;
-
-    return (
-      <div className="btn-group">
-        <button
-          className={`btn btn${filter === '' ? '' : '-outline'}-light`}
-          type="button"
-          onClick={this.onClearFilter}
-        >
-          Все сотрудники
-        </button>
-        <button
-          className={`btn btn${filter === 'rise' ? '' : '-outline'}-light`}
-          type="button"
-          onClick={this.onUpdateFilter}
-          data-filter="rise"
-        >
-          Сотрудники на повышение
-        </button>
-        <button
-          className={`btn btn${filter === 'moreThen' ? '' : '-outline'}-light`}
-          type="button"
-          onClick={this.onUpdateFilter}
-          data-filter="moreThen"
-        >
-          З/П больше 1000$
-        </button>
-      </div>
-    );
-  }
-}
+        return (
+          <button
+            className={clazz}
+            key={name}
+            onClick={() => props.onUpdateFilter(name)}
+          >
+            {value}
+          </button>
+        );
+      })}
+    </div>
+  );
+};
 
 export default AppFilter;

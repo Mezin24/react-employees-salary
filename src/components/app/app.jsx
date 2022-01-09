@@ -92,7 +92,7 @@ class App extends Component {
 
         <div className={classes['search-panel']}>
           <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-          <AppFilter onUpdateFilter={this.onUpdateFilter} />
+          <AppFilter onUpdateFilter={this.onUpdateFilter} filter={filter} />
         </div>
 
         <EmployeesList
